@@ -1,0 +1,70 @@
+' 標準モジュール: re_module
+Option Explicit
+
+' フラグ定数（Regex クラスと同じ値）
+Public Const IGNORECASE As Long = 1
+Public Const MULTILINE As Long = 2
+Public Const DOTALL As Long = 4
+
+' compile: パターンとフラグから Regex オブジェクトを生成
+Public Function compile(pattern As String, Optional flags As Long = 0) As Regex
+    Dim rx As New Regex
+    rx.Init pattern, flags
+    Set compile = rx
+End Function
+
+' search: 文字列内でパターンに一致する部分を返す
+Public Function search(pattern As String, text As String, Optional flags As Long = 0) As Object
+    Dim rx As New Regex
+    rx.Init pattern, flags
+    Set search = rx.Search(text)
+End Function
+
+' match: 文字列の先頭でパターンに一致する場合のみ返す
+Public Function match(pattern As String, text As String, Optional flags As Long = 0) As Object
+    Dim rx As New Regex
+    rx.Init pattern, flags
+    Set match = rx.Match(text)
+End Function
+
+' fullmatch: 文字列全体がパターンに一致する場合のみ返す
+Public Function fullmatch(pattern As String, text As String, Optional flags As Long = 0) As Object
+    Dim rx As New Regex
+    rx.Init pattern, flags
+    Set fullmatch = rx.FullMatch(text)
+End Function
+
+' findall: すべての一致を Collection として返す
+Public Function findall(pattern As String, text As String, Optional flags As Long = 0) As Collection
+    Dim rx As New Regex
+    rx.Init pattern, flags
+    Set findall = rx.FindAll(text)
+End Function
+
+' finditer: findall と同様に Collection を返す
+Public Function finditer(pattern As String, text As String, Optional flags As Long = 0) As Collection
+    Dim rx As New Regex
+    rx.Init pattern, flags
+    Set finditer = rx.FindIter(text)
+End Function
+
+' split: パターンで文字列を分割し、配列として返す
+Public Function split(pattern As String, text As String, Optional flags As Long = 0) As Variant
+    Dim rx As New Regex
+    rx.Init pattern, flags
+    split = rx.Split(text)
+End Function
+
+' sub: 一致した部分を replacement で置換
+Public Function sub(pattern As String, replacement As String, text As String, Optional flags As Long = 0) As String
+    Dim rx As New Regex
+    rx.Init pattern, flags
+    sub = rx.Sub(replacement, text)
+End Function
+
+' subn: 置換後の文字列と置換回数を配列で返す
+Public Function subn(pattern As String, replacement As String, text As String, Optional flags As Long = 0) As Variant
+    Dim rx As New Regex
+    rx.Init pattern, flags
+    subn = rx.SubN(replacement, text)
+End Function
